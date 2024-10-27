@@ -2,3 +2,7 @@ bin/project/Task.class
 bin/project/RemoveTask.class
 bin/project/RemoveProject.class
 bin/project/Main.class
+bin/project/TaskManager.class
+bin/project/TaskCellRenderer.class
+bin/project/ProjectTaskManagerApp.class
+bin/project/Project.class
