@@ -3,8 +3,6 @@ package project;
 import javax.swing.*;
 import java.awt.*;
 
-@SuppressWarnings("serial")
-// Task Cell Renderer for coloring task list based on status
 class TaskCellRenderer extends JLabel implements ListCellRenderer<Task> {
     @Override
     public Component getListCellRendererComponent(JList<? extends Task> list, Task task, int index, boolean isSelected, boolean cellHasFocus) {
