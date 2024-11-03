@@ -2,7 +2,6 @@ package project;
 
 import javax.swing.*;
 
-// Class to handle task removal logic
 public class RemoveTask {
     private final JList<Task> taskList;
     private final DefaultListModel<Task> taskListModel;
@@ -20,10 +19,10 @@ public class RemoveTask {
             Task selectedTask = taskListModel.get(selectedIndex);
             Project project = taskManager.getProjectByName(selectedTask.getProjectName());
             if (project != null) {
-                project.getTasks().remove(selectedTask); // Remove from project
+                project.getTasks().remove(selectedTask);
             }
-            taskListModel.remove(selectedIndex); // Remove from list model
-            taskManager.saveTasksToFile(); // Save updated tasks
+            taskListModel.remove(selectedIndex);
+            taskManager.saveTasksToFile(); 
         } else {
             JOptionPane.showMessageDialog(null, "Please select a task to remove.");
         }

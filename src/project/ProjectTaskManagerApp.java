@@ -3,14 +3,14 @@ package project;
 import javax.swing.*;
 import java.awt.*;
 
-// Main GUI Frame for Project Manager
 public class ProjectTaskManagerApp extends JFrame {
     private final DefaultListModel<Task> taskListModel = new DefaultListModel<>();
     private final JTextField projectNameField = new JTextField(15);
     private final JTextField taskNameField = new JTextField(15);
     private final JTextField memberNameField = new JTextField(15);
     private final JTextField deadlineField = new JTextField(10);
-    private final JComboBox<String> statusComboBox = new JComboBox<>(new String[]{"Not Started", "In Progress", "Completed"});
+    private final JComboBox<String> statusComboBox = new JComboBox<>(
+            new String[] { "Not Started", "In Progress", "Completed" });
     private final JComboBox<String> projectComboBox = new JComboBox<>();
     private final TaskManager taskManager = new TaskManager();
     private final JList<Task> taskList = new JList<>(taskListModel);
@@ -23,52 +23,72 @@ public class ProjectTaskManagerApp extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Top panel for adding projects and tasks
+        // Add projects and tasks
         JPanel topPanel = new JPanel(new GridBagLayout());
-        topPanel.setBackground(new Color(180, 220, 200)); // Light blue background
+        topPanel.setBackground(new Color(180, 220, 200));
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5); // Add some padding
+        gbc.insets = new Insets(5, 5, 5, 5);
 
         // Project Name
-        gbc.gridx = 0; gbc.gridy = 0; gbc.anchor = GridBagConstraints.EAST;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.EAST;
         topPanel.add(new JLabel("Project Name:"), gbc);
-        
-        gbc.gridx = 1; gbc.gridy = 0; gbc.anchor = GridBagConstraints.WEST;
+
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.WEST;
         topPanel.add(projectNameField, gbc);
-        
-        gbc.gridx = 2; gbc.gridy = 0;
+
+        gbc.gridx = 2;
+        gbc.gridy = 0;
         JButton addProjectButton = new JButton("Add Project");
         addProjectButton.addActionListener(e -> addProject());
         topPanel.add(addProjectButton, gbc);
 
         // Task Details
-        gbc.gridx = 0; gbc.gridy = 1; gbc.anchor = GridBagConstraints.EAST;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.EAST;
         topPanel.add(new JLabel("Task Name:"), gbc);
-        
-        gbc.gridx = 1; gbc.gridy = 1; gbc.anchor = GridBagConstraints.WEST;
+
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.WEST;
         topPanel.add(taskNameField, gbc);
 
-        gbc.gridx = 0; gbc.gridy = 2; gbc.anchor = GridBagConstraints.EAST;
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.anchor = GridBagConstraints.EAST;
         topPanel.add(new JLabel("Member Name:"), gbc);
-        
-        gbc.gridx = 1; gbc.gridy = 2; gbc.anchor = GridBagConstraints.WEST;
+
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.anchor = GridBagConstraints.WEST;
         topPanel.add(memberNameField, gbc);
 
-        gbc.gridx = 0; gbc.gridy = 3; gbc.anchor = GridBagConstraints.EAST;
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.anchor = GridBagConstraints.EAST;
         topPanel.add(new JLabel("Deadline (YYYY-MM-DD):"), gbc);
-        
-        gbc.gridx = 1; gbc.gridy = 3; gbc.anchor = GridBagConstraints.WEST;
+
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        gbc.anchor = GridBagConstraints.WEST;
         topPanel.add(deadlineField, gbc);
 
-        gbc.gridx = 0; gbc.gridy = 4; gbc.anchor = GridBagConstraints.EAST;
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.anchor = GridBagConstraints.EAST;
         topPanel.add(new JLabel("Status:"), gbc);
-        
-        gbc.gridx = 1; gbc.gridy = 4; gbc.anchor = GridBagConstraints.WEST;
+
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        gbc.anchor = GridBagConstraints.WEST;
         topPanel.add(statusComboBox, gbc);
 
-        // Create a panel for Add Task, Remove Task, Update Status, and Remove Project buttons
         JPanel taskButtonsPanel = new JPanel(new FlowLayout());
-        taskButtonsPanel.setBackground(new Color(180, 200, 220)); // Light blue-gray background
+        taskButtonsPanel.setBackground(new Color(180, 200, 220));
 
         JButton addTaskButton = new JButton("Add Task");
         addTaskButton.addActionListener(e -> addTask());
@@ -86,29 +106,26 @@ public class ProjectTaskManagerApp extends JFrame {
         removeProjectButton.addActionListener(e -> removeProject());
         taskButtonsPanel.add(removeProjectButton);
 
-        // Add task buttons panel to topPanel
-        gbc.gridx = 0; gbc.gridy = 5; gbc.gridwidth = 3; // Make it span across columns
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        gbc.gridwidth = 3;
         topPanel.add(taskButtonsPanel, gbc);
 
-        // Center panel for displaying tasks
         taskList.setCellRenderer(new TaskCellRenderer());
         JScrollPane taskScrollPane = new JScrollPane(taskList);
-        taskScrollPane.getViewport().setBackground(new Color(1,100,200)); // Lightest blue background for the list
+        taskScrollPane.getViewport().setBackground(new Color(1, 100, 200));
 
-        // Project filter dropdown
         JPanel filterPanel = new JPanel(new FlowLayout());
-        filterPanel.setBackground(new Color(1,100,200)); // Light blue background for the filter panel
+        filterPanel.setBackground(new Color(1, 100, 200));
         filterPanel.add(new JLabel("Select Project:"));
         projectComboBox.addItem("All");
         projectComboBox.addActionListener(e -> filterTasks());
         filterPanel.add(projectComboBox);
 
-        // Add components to the frame
         add(topPanel, BorderLayout.NORTH);
         add(taskScrollPane, BorderLayout.CENTER);
         add(filterPanel, BorderLayout.SOUTH);
 
-        // Load saved tasks and projects from file on startup
         taskManager.loadTasksFromFile();
         updateProjectList();
 
@@ -206,5 +223,3 @@ public class ProjectTaskManagerApp extends JFrame {
         statusComboBox.setSelectedIndex(0);
     }
 }
-
-

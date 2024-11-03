@@ -18,9 +18,9 @@ public class RemoveProject {
                     "Are you sure you want to remove the project \"" + selectedProject + "\"?",
                     "Confirm Removal", JOptionPane.YES_NO_OPTION);
             if (confirmation == JOptionPane.YES_OPTION) {
-                taskManager.removeProject(selectedProject); // Remove the project from the TaskManager
-                projectComboBox.removeItem(selectedProject); // Remove from the dropdown
-                projectComboBox.setSelectedItem("All"); // Reset selection to "All"
+                taskManager.removeProject(selectedProject);
+                projectComboBox.removeItem(selectedProject);
+                projectComboBox.setSelectedItem("All");
                 JOptionPane.showMessageDialog(null, "Project removed successfully.");
             }
         } else {
