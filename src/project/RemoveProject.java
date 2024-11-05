@@ -11,7 +11,8 @@ public class RemoveProject {
         this.taskManager = taskManager;
     }
 
-    public void removeSelectedProject() {
+    public void removeSelectedProject() 
+    {
         String selectedProject = (String) projectComboBox.getSelectedItem();
         if (selectedProject != null && !selectedProject.equals("All")) {
             int confirmation = JOptionPane.showConfirmDialog(null,
@@ -23,7 +24,8 @@ public class RemoveProject {
                 projectComboBox.setSelectedItem("All");
                 JOptionPane.showMessageDialog(null, "Project removed successfully.");
             }
-        } else {
+        } 
+        else {
             JOptionPane.showMessageDialog(null, "Please select a valid project to remove.");
         }
     }
